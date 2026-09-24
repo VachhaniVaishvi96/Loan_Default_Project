@@ -225,3 +225,9 @@ def predict(application: LoanApplication):
     record_id = save_prediction(application, status, category, probability)
     logger.info("Scored prediction id=%s category=%s probability=%.4f", record_id, category, probability)
     return {"id": record_id, "loan_status": status, "probability_score": round(probability, 4), "risk_category": category, "explanation": explanation(application, probability), "model": "Logistic Regression", "model_version": "logistic-regression-v1"}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+

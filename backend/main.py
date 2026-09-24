@@ -63,7 +63,7 @@ class PredictionRecord(BaseModel):
 
 
 app = FastAPI(title="Lumen Credit Risk API", version="2.0.0", description="Production-style loan risk scoring service backed by a serialized Logistic Regression model.")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=False, allow_methods=["*"], allow_headers=["*"])
 
 RATE_LIMIT = 60
 rate_events: dict[str, deque[float]] = defaultdict(deque)

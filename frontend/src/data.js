@@ -1,0 +1,9 @@
+export const EDUCATION = ["High School", "Bachelor's", "Master's", "PhD"];
+export const EMPLOYMENT = ["Full-time", "Part-time", "Self-employed", "Unemployed"];
+export const MARITAL = ["Single", "Married", "Divorced"];
+export const YES_NO = ["Yes", "No"];
+export const PURPOSE = ["Home", "Auto", "Education", "Business", "Other"];
+export const TERMS = [12, 24, 36, 48, 60];
+export const emptyForm = { age: 34, income: 72000, loanAmount: 48000, creditScore: 680, monthsEmployed: 36, numCreditLines: 3, interestRate: 11.5, loanTerm: 36, dtiRatio: 0.32, education: "Bachelor's", employmentType: "Full-time", maritalStatus: "Married", hasMortgage: "No", hasDependents: "Yes", loanPurpose: "Home", hasCoSigner: "No" };
+export const sampleProfiles = [{ name: "Prime applicant", form: { ...emptyForm, age: 56, income: 85994, loanAmount: 50587, creditScore: 720, monthsEmployed: 80, interestRate: 8.15, dtiRatio: 0.28, hasMortgage: "Yes", hasCoSigner: "Yes" } }, { name: "Stress case", form: { ...emptyForm, age: 25, income: 40298, loanAmount: 90448, creditScore: 451, monthsEmployed: 8, interestRate: 22.72, dtiRatio: 0.68, education: "High School", employmentType: "Unemployed", maritalStatus: "Single", loanPurpose: "Auto", hasCoSigner: "No" } }];
+export const DATASET_STATS = [{ label: "Historical applications", value: "255,347" }, { label: "Model accuracy", value: "88.6%" }, { label: "Observed default rate", value: "11.6%" }, { label: "Model features", value: "16" }];

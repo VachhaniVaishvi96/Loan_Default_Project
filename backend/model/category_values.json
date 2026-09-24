@@ -1,0 +1,38 @@
+{
+  "education": [
+    "Bachelor's",
+    "High School",
+    "Master's",
+    "PhD"
+  ],
+  "employmenttype": [
+    "Full-time",
+    "Part-time",
+    "Self-employed",
+    "Unemployed"
+  ],
+  "maritalstatus": [
+    "Divorced",
+    "Married",
+    "Single"
+  ],
+  "hasmortgage": [
+    "No",
+    "Yes"
+  ],
+  "hasdependents": [
+    "No",
+    "Yes"
+  ],
+  "loanpurpose": [
+    "Auto",
+    "Business",
+    "Education",
+    "Home",
+    "Other"
+  ],
+  "hascosigner": [
+    "No",
+    "Yes"
+  ]
+}

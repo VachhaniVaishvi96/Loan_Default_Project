@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 import sqlite3
 import time
 from collections import defaultdict, deque
@@ -22,10 +21,10 @@ MODEL_PATH = MODEL_DIR / "loan_default_model.pkl"
 SCALER_PATH = MODEL_DIR / "scaler.pkl"
 CATEGORIES_PATH = MODEL_DIR / "category_values.json"
 DATA_PATH = ROOT_DIR / "Loan_default.csv"
-DB_PATH = Path(os.getenv("DATABASE_PATH", str(BACKEND_DIR / "loan_predictions.db")))
+DB_PATH = BACKEND_DIR / "loan_predictions.db"
 FEATURES = ["age", "income", "loan_amount", "credit_score", "months_employed", "num_credit_lines", "interest_rate", "loan_term", "dti_ratio", "education", "employment_type", "marital_status", "has_mortgage", "has_dependents", "loan_purpose", "has_cosigner"]
 logger = logging.getLogger("lumen-credit")
-logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(asctime)s %(levelname)s %(name)s %(message)s")
+logging.basicConfig(level="INFO", format="%(asctime)s %(levelname)s %(name)s %(message)s")
 
 
 class LoanApplication(BaseModel):
@@ -64,15 +63,9 @@ class PredictionRecord(BaseModel):
 
 
 app = FastAPI(title="Lumen Credit Risk API", version="2.0.0", description="Production-style loan risk scoring service backed by a serialized Logistic Regression model.")
-cors_origins_env = os.getenv("CORS_ORIGINS", "*")
-if cors_origins_env.strip() == "*":
-    origins = ["*"]
-else:
-    origins = [item.strip() for item in cors_origins_env.split(",") if item.strip()]
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
-app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
-
-RATE_LIMIT = int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
+RATE_LIMIT = 60
 rate_events: dict[str, deque[float]] = defaultdict(deque)
 rate_lock = Lock()
 

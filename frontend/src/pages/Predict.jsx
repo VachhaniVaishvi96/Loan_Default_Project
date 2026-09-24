@@ -9,6 +9,8 @@ import {
   sampleProfiles,
   TERMS,
   YES_NO,
+  getRandomLowRiskForm,
+  getRandomHighRiskForm,
 } from "../data.js";
 
 function Field({ label, children }) {
@@ -36,6 +38,19 @@ export default function Predict() {
   const [error, setError] = useState("");
   const update = (name, value) =>
     setForm((current) => ({ ...current, [name]: value }));
+
+  const handleRandomLowRisk = () => {
+    setForm(getRandomLowRiskForm());
+    setResult(null);
+    setError("");
+  };
+
+  const handleRandomHighRisk = () => {
+    setForm(getRandomHighRiskForm());
+    setResult(null);
+    setError("");
+  };
+
   async function onSubmit(event) {
     event.preventDefault();
     setStatus("loading");
@@ -106,12 +121,32 @@ export default function Predict() {
           <div className="form-toolbar">
             <h2>Applicant and facility</h2>
             <div className="chips">
+              <button
+                className="chip chip-low-risk"
+                type="button"
+                onClick={handleRandomLowRisk}
+                title="Fill form with random low-risk data"
+              >
+                🎲 Random Low Risk
+              </button>
+              <button
+                className="chip chip-high-risk"
+                type="button"
+                onClick={handleRandomHighRisk}
+                title="Fill form with random high-risk data"
+              >
+                🎲 Random High Risk
+              </button>
               {sampleProfiles.map((profile) => (
                 <button
                   className="chip"
                   type="button"
                   key={profile.name}
-                  onClick={() => setForm(profile.form)}
+                  onClick={() => {
+                    setForm(profile.form);
+                    setResult(null);
+                    setError("");
+                  }}
                 >
                   {profile.name}
                 </button>
@@ -267,6 +302,20 @@ export default function Predict() {
               {status === "loading"
                 ? "Scoring application"
                 : "Run risk assessment"}
+            </button>
+            <button
+              className="btn btn-low-risk"
+              type="button"
+              onClick={handleRandomLowRisk}
+            >
+              🟢 Fill Random Low Risk
+            </button>
+            <button
+              className="btn btn-high-risk"
+              type="button"
+              onClick={handleRandomHighRisk}
+            >
+              🔴 Fill Random High Risk
             </button>
             <button
               className="btn ghost"

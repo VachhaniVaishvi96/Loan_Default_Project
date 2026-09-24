@@ -6,7 +6,6 @@ import {
   emptyForm,
   MARITAL,
   PURPOSE,
-  sampleProfiles,
   TERMS,
   YES_NO,
   getRandomLowRiskForm,
@@ -137,20 +136,6 @@ export default function Predict() {
               >
                 🎲 Random High Risk
               </button>
-              {sampleProfiles.map((profile) => (
-                <button
-                  className="chip"
-                  type="button"
-                  key={profile.name}
-                  onClick={() => {
-                    setForm(profile.form);
-                    setResult(null);
-                    setError("");
-                  }}
-                >
-                  {profile.name}
-                </button>
-              ))}
             </div>
           </div>
           <div className="form-grid">
@@ -302,20 +287,6 @@ export default function Predict() {
               {status === "loading"
                 ? "Scoring application"
                 : "Run risk assessment"}
-            </button>
-            <button
-              className="btn btn-low-risk"
-              type="button"
-              onClick={handleRandomLowRisk}
-            >
-              🟢 Fill Random Low Risk
-            </button>
-            <button
-              className="btn btn-high-risk"
-              type="button"
-              onClick={handleRandomHighRisk}
-            >
-              🔴 Fill Random High Risk
             </button>
             <button
               className="btn ghost"
